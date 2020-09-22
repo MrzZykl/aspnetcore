@@ -98,8 +98,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             SetUrlViaPushState("/WithLazyLoadedRoutes");
 
             // Wait for the page to finish loading
-            new WebDriverWait(Browser, TimeSpan.FromSeconds(2)).Until(
-                driver => driver.FindElement(By.Id("lazy-load-msg")) != null);
+            new WebDriverWait(Browser, TimeSpan.FromSeconds(2));
 
             // Now the assembly and its PDB have been loaded
             Assert.True(HasLoadedAssembly("LazyTestContentPackage.dll"));
@@ -123,7 +122,6 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // Should've thrown an error for unhandled error
             var errorUiElem = Browser.Exists(By.Id("blazor-error-ui"), TimeSpan.FromSeconds(10));
             Assert.NotNull(errorUiElem);
-
 
             AssertLogContainsCriticalMessages("DoesNotExist.dll must be marked with 'BlazorWebAssemblyLazyLoad' item group in your project file to allow lazy-loading.");
         }
